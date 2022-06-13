@@ -10,28 +10,29 @@ func TestCekGanjilGenap(t *testing.T) {
 	tests := []struct {
 		name     string
 		expectes string
-		param    int
+		param    []int
 	}{
 		{
 			name:     "01",
-			expectes: "Ganjil",
-			param:    1,
+			expectes: "Ganjil, Genap, Ganjil, Genap, Ganjil",
+			param:    []int{1, 2, 3, 4, 5},
 		},
 		{
 			name:     "02",
-			expectes: "Genap",
-			param:    2,
+			expectes: "Genap, Ganjil, Genap, Ganjil, Genap",
+			param:    []int{6, 7, 8, 9, 10},
 		},
 		{
 			name:     "03",
-			expectes: "Ganjil",
-			param:    3,
+			expectes: "Ganjil, Genap, Ganjil, Genap, Ganjil",
+			param:    []int{11, 12, 13, 14, 15},
 		},
 	}
 	assert := assert.New(t)
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			assert.Equal(test.expectes, CekGanjilGenap(test.param))
+			result := CekGanjilGenap(test.param...)
+			assert.Equal(test.expectes, result)
 		})
 	}
 }
@@ -39,25 +40,25 @@ func TestCekGanjilGenap(t *testing.T) {
 func BenchmarkCekGanjilGenap(b *testing.B) {
 	tests := []struct {
 		name  string
-		param int
+		param []int
 	}{
 		{
 			name:  "01",
-			param: 1,
+			param: []int{1, 2, 3, 4, 5},
 		},
 		{
 			name:  "02",
-			param: 2,
+			param: []int{6, 7, 8, 9, 10},
 		},
 		{
 			name:  "03",
-			param: 3,
+			param: []int{11, 12, 13, 14, 15},
 		},
 	}
 	for _, test := range tests {
 		b.Run(test.name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				CekGanjilGenap(test.param)
+				CekGanjilGenap(test.param...)
 			}
 		})
 	}

@@ -1,4 +1,4 @@
-module github.com/raa11dev/matematika
+module github.com/raa11dev/matematika/v2
 
 go 1.18
 
